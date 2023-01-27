@@ -3,6 +3,7 @@ import ColorBox from "./ColorBox";
 import "rc-slider/assets/index.css";
 import Slider from "rc-slider";
 import "./Pallete.css";
+import Navbar from "./Navbar";
 
 class Pallete extends Component {
   constructor(props) {
@@ -11,9 +12,9 @@ class Pallete extends Component {
     this.changeLevel = this.changeLevel.bind(this);
   }
   changeLevel(newLevel) {
-    console.log(newLevel);
     this.setState({ level: newLevel });
   }
+
   render() {
     const { colors } = this.props.palette;
     const { level } = this.state;
@@ -22,15 +23,7 @@ class Pallete extends Component {
     });
     return (
       <div className="Pallete">
-        <div className="slider">
-          <Slider
-            defaultValue={this.state.level}
-            min={100}
-            max={900}
-            step={100}
-            onChange={this.changeLevel}
-          />
-        </div>
+        <Navbar level={level} changeLevel={this.changeLevel} />
         <div className="Pallete-colors">{colorBoxes}</div>
         {/* footer eventually */}
       </div>
