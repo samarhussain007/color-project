@@ -1,0 +1,4 @@
+.PaletteList {
+  display: flex;
+  flex-direction: column;
+}
