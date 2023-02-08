@@ -1,10 +1,11 @@
 import { palette } from "@mui/system";
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import MiniPallete from "./MiniPalette";
-import { withStyles } from "@material-ui/styles";
+import { makeStyles } from "@material-ui/styles";
 import "./PaletteList.css";
-const styles = {
+
+const useStyles = makeStyles({
   root: {
     backgroundColor: "blue",
     height: "100vh",
@@ -18,7 +19,6 @@ const styles = {
     alignItems: "flex-start",
     flexDirection: "column",
     flexWrap: "wrap",
-    border: "1px solid white",
   },
   nav: {
     display: "flex",
@@ -33,25 +33,38 @@ const styles = {
     gridTemplateColumns: "repeat(3,30%)",
     gridGap: "5%",
   },
-};
-class PalleteList extends Component {
-  render() {
-    const { palettes, classes } = this.props;
+});
 
-    return (
-      <div className={classes.root}>
-        <div className={classes.container}>
-          <nav className={classes.nav}>
-            <h1>React Colors</h1>
-          </nav>
-          <div className={classes.palettes}>
-            {palettes.map((palette) => {
-              return <MiniPallete {...palette} />;
-            })}
-          </div>
+const PalleteList = ({ palettes }) => {
+  // const history = useHistory();
+  const navigate = useNavigate();
+
+  const classes = useStyles();
+
+  const handleClick = (id) => {
+    navigate(`/palette/${id}`);
+  };
+
+  return (
+    <div className={classes.root}>
+      <div className={classes.container}>
+        <nav className={classes.nav}>
+          <h1>React Colors</h1>
+        </nav>
+        <div className={classes.palettes}>
+          {palettes.map((palette) => {
+            return (
+              <MiniPallete
+                {...palette}
+                handleClick={() => handleClick(palette.id)}
+                key={palette.id}
+              />
+            );
+          })}
         </div>
       </div>
-    );
-  }
-}
-export default withStyles(styles)(PalleteList);
+    </div>
+  );
+};
+
+export default PalleteList;
