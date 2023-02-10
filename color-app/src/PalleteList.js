@@ -2,7 +2,7 @@ import { palette } from "@mui/system";
 import React, { useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import MiniPallete from "./MiniPalette";
-import { makeStyles } from "@material-ui/styles";
+import { makeStyles } from "@mui/styles";
 import "./PaletteList.css";
 
 const useStyles = makeStyles({
