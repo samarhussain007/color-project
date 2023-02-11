@@ -37,7 +37,7 @@ function SingleColorPalette(props) {
       background={el[format]}
       name={el.name}
       key={el.name}
-      showLink={false}
+      showingFullPalette={false}
     />
   ));
 

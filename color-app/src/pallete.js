@@ -26,6 +26,7 @@ function Pallete(props) {
         key={el.name}
         id={el.id}
         paletteId={id}
+        showingFullPalette={true}
         // {...palette}
       />
     );
