@@ -2,12 +2,13 @@ import React, { Component, useState } from "react";
 import ColorBox from "./ColorBox";
 import "rc-slider/assets/index.css";
 import Slider from "rc-slider";
-import "./Pallete.css";
+// import "./Pallete.css";
 import Navbar from "./Navbar";
 import { useParams } from "react-router-dom";
 import seedColors from "./seedColors";
 import { generatedPallete } from "./ColorHelper";
 import PaletteFooter from "./PaletteFooter";
+import { styled } from "@mui/material";
 
 function Pallete(props) {
   const { id } = useParams();
@@ -17,6 +18,17 @@ function Pallete(props) {
   const [level, setLevel] = useState(500);
   const [format, setFormat] = useState("hex");
   const { colors } = palette;
+
+  const StyledPalette = styled("div")(
+    () => `
+  height: 100vh;
+  overflow: hidden;
+
+  .Pallete-colors {
+    height: 90%;
+  }
+  `
+  );
 
   const colorBoxes = colors[level].map((el) => {
     return (
@@ -39,7 +51,7 @@ function Pallete(props) {
   }
 
   return (
-    <div className="Pallete">
+    <StyledPalette className="Pallete">
       <Navbar
         level={level}
         changeLevel={changeLevel}
@@ -48,7 +60,7 @@ function Pallete(props) {
       />
       <div className="Pallete-colors">{colorBoxes}</div>
       <PaletteFooter paletteName={palette.palleteName} emoji={palette.emoji} />
-    </div>
+    </StyledPalette>
   );
 }
 export default Pallete;

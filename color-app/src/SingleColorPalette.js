@@ -7,8 +7,8 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import Navbar from "./Navbar";
 import ColorBox from "./ColorBox";
-import "./colorBox.css";
 import PaletteFooter from "./PaletteFooter";
+import StyledSingleColorPalette from "./styles/PalleteStyles";
 function SingleColorPalette(props) {
   const { id, colorId } = useParams();
   const [format, setFormat] = useState("hex");
@@ -42,7 +42,7 @@ function SingleColorPalette(props) {
   ));
 
   return (
-    <div className="SingleColorPalette Pallete">
+    <StyledSingleColorPalette>
       <Navbar handleChange={changeFormat} showingAllColors={false} />
       <h1>SINGLE PALETTE COLOR</h1>
       <div className="Pallete-colors">
@@ -54,7 +54,7 @@ function SingleColorPalette(props) {
         </div>
       </div>
       <PaletteFooter paletteName={palette.palleteName} emoji={palette.emoji} />
-    </div>
+    </StyledSingleColorPalette>
   );
 }
 

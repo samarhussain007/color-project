@@ -1,12 +1,12 @@
 import React from "react";
-import "./Pallete.css";
+import StyledFooter from "./styles/PalleteFooter";
 function PaletteFooter(props) {
   const { paletteName, emoji } = props;
   return (
-    <footer className="Palette-footer">
+    <StyledFooter className="Palette-footer">
       <div>{paletteName}</div>
       <span className="emoji">{emoji}</span>
-    </footer>
+    </StyledFooter>
   );
 }
 
