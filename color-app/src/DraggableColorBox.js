@@ -18,7 +18,7 @@ const StyledDraggableColorBox = styled.div`
 export default function DraggableColorBox(props) {
   return (
     <StyledDraggableColorBox style={{ background: props.color }}>
-      {props.color}
+      {props.name}
     </StyledDraggableColorBox>
   );
 }
