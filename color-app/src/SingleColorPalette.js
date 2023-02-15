@@ -44,7 +44,6 @@ function SingleColorPalette(props) {
   return (
     <StyledSingleColorPalette>
       <Navbar handleChange={changeFormat} showingAllColors={false} />
-      <h1>SINGLE PALETTE COLOR</h1>
       <div className="Pallete-colors">
         {colorBoxes}
         <div className="go-back ColorBox">

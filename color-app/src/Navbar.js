@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "rc-slider/assets/index.css";
 import Slider from "rc-slider";
-import "./Navbar.css";
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -12,6 +11,7 @@ import { hexToRgb } from "@mui/material";
 import Snackbar from "@mui/material/Snackbar";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
+import StyledNavbar from "./styles/NavbarStyles.js";
 class Navbar extends Component {
   constructor(props) {
     super(props);
@@ -27,12 +27,13 @@ class Navbar extends Component {
   handleClose() {
     this.setState({ open: false });
   }
+
   render() {
     const { level, changeLevel, showingAllColors } = this.props;
     const { format, open } = this.state;
 
     return (
-      <header className="Navbar">
+      <StyledNavbar className="Navbar">
         <div className="logo">
           <a href="/">reatcolorPicker</a>
         </div>
@@ -82,7 +83,7 @@ class Navbar extends Component {
             }
           />
         </div>
-      </header>
+      </StyledNavbar>
     );
   }
 }

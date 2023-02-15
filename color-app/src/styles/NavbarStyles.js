@@ -1,9 +1,13 @@
-.Navbar {
+import { styled } from "@mui/material";
+
+const StyledNavbar = styled("header")(
+  () => `
+
   display: flex;
   align-items: center;
   justify-content: flex-start;
   height: 6vh;
-}
+
 
 .logo {
   margin-right: 15px;
@@ -51,4 +55,7 @@
 
 .select-container {
   margin-left: auto;
-}
+}`
+);
+
+export default StyledNavbar;

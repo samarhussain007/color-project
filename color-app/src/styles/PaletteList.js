@@ -20,6 +20,11 @@ const StyledPaletteList = styled("div")(
         width: 100%;
         justify-content:space-between;
         color: "white";
+        align-items: center;
+        color: white;
+        & a{
+          color: white;
+        }
       }
       .palettes{
         boxSizing: border-box;

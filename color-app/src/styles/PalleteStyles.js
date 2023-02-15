@@ -42,9 +42,6 @@ const StyledSingleColorPalette = styled("div")(
     background: rgba(255, 255, 255, 0.5);
     color: black;
   }
-
-
-
   `
 );
 
