@@ -9,10 +9,16 @@ import seedColors from "./seedColors";
 import { generatedPallete } from "./ColorHelper";
 import PaletteFooter from "./PaletteFooter";
 import { styled } from "@mui/material";
+import { useEffect } from "react";
+// import generatedPallete from "./ColorHelper";
 
 function Pallete(props) {
+  useEffect(() => {
+    generatedPallete(...props.palette);
+  }, [props.palette]);
   const { id } = useParams();
-  const findPallete = (id) => seedColors.find((palette) => palette.id === id);
+  const findPallete = (id) =>
+    props.palette.find((palette) => palette.id === id);
   const palette = generatedPallete(findPallete(id));
 
   const [level, setLevel] = useState(500);

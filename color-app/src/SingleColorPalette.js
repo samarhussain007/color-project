@@ -13,7 +13,8 @@ function SingleColorPalette(props) {
   const { id, colorId } = useParams();
   const [format, setFormat] = useState("hex");
   console.log(props.palette);
-  const findPallete = (id) => seedColors.find((palette) => palette.id === id);
+  const findPallete = (id) =>
+    props.palette.find((palette) => palette.id === id);
   const palette = generatedPallete(findPallete(id));
   function changeFormat(evt) {
     setFormat(evt);

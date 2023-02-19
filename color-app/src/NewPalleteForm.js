@@ -2,20 +2,18 @@ import * as React from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
-import CssBaseline from "@mui/material/CssBaseline";
-import MuiAppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { ChromePicker } from "react-color";
 import { Button } from "@mui/material";
-import DraggableColorBox from "./DraggableColorBox";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
-
+import { useNavigate } from "react-router-dom";
+import { arrayMove } from "react-sortable-hoc";
+import DraggableColorList from "./DraggableColorList";
+import PaletteFormNav from "./PaletteFormNav";
+import ColorPickerForm from "./ColorPickerForm";
 const drawerWidth = 400;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
@@ -38,23 +36,6 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
   })
 );
 
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open }) => ({
-  transition: theme.transitions.create(["margin", "width"], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  ...(open && {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: `${drawerWidth}px`,
-    transition: theme.transitions.create(["margin", "width"], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  }),
-}));
-
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
@@ -64,15 +45,16 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
-export default function PersistentDrawerLeft() {
+export default function PersistentDrawerLeft(props) {
+  const { maxColors = 20 } = props;
+
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
-  const [currentColor, setCurrentColor] = React.useState("teal");
+  const [colors, setColors] = React.useState(props.palettes[0].colors);
+  const paletteIsFull = colors.length >= maxColors;
 
-  const [newColorName, setNewColorName] = React.useState("");
-
-  const [colors, setColors] = React.useState([]);
+  const navigate = useNavigate();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -82,51 +64,59 @@ export default function PersistentDrawerLeft() {
     setOpen(false);
   };
 
-  const handleColorChange = (color) => {
-    setCurrentColor(color.hex);
-  };
-
-  const addNewColor = () => {
-    const newColor = {
-      color: currentColor,
-      name: newColorName,
-    };
-
+  const addNewColor = (newColor) => {
     setColors([...colors, newColor]);
   };
 
-  const handleNewColorNameChange = (e) => {
-    setNewColorName(e.target.value);
+  const onSortEnd = ({ oldIndex, newIndex }) => {
+    setColors((colors) => arrayMove(colors, oldIndex, newIndex));
   };
 
-  React.useEffect(() => {
-    ValidatorForm.addValidationRule("isColorNameUnique", (value) =>
-      colors.every(({ name }) => name.toLowerCase() !== value.toLowerCase())
-    );
-    ValidatorForm.addValidationRule("isColorUnique", (value) =>
-      colors.every(({ color }) => color !== currentColor)
-    );
-  }, [colors, currentColor]);
+  const handleSave = (newPalleteName) => {
+    const newPallete = {
+      paletteName: newPalleteName,
+      id: newPalleteName.toLowerCase().replace(/ /g, "-"),
+      emoji: "🎨",
+      colors: colors,
+    };
+    // console.log(newPallete);
+    props.savePallete(newPallete);
+    navigate("/");
+  };
+
+  const handleDelete = (colorName) => {
+    setColors(colors.filter((color) => color.name !== colorName));
+  };
+
+  const clearColors = () => {
+    setColors([]);
+  };
+
+  const addRandomColor = () => {
+    const allColors = props.palettes.map((p) => p.colors).flat();
+    console.log(allColors);
+
+    let rand;
+    let randomColor;
+    let isDuplicateColor = true;
+    while (isDuplicateColor) {
+      rand = Math.floor(Math.random() * allColors.length);
+      randomColor = allColors[rand];
+      isDuplicateColor = colors.some(
+        (color) => color.name === randomColor.name
+      );
+    }
+    setColors([...colors, randomColor]);
+  };
 
   return (
     <Box sx={{ display: "flex" }}>
-      <CssBaseline />
-      <AppBar position="fixed" open={open}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{ mr: 2, ...(open && { display: "none" }) }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Persistent drawer
-          </Typography>
-        </Toolbar>
-      </AppBar>
+      <PaletteFormNav
+        open={open}
+        palettes={props.palettes}
+        handleSave={handleSave}
+        handleDrawerOpen={handleDrawerOpen}
+      />
       <Drawer
         sx={{
           width: drawerWidth,
@@ -148,47 +138,32 @@ export default function PersistentDrawerLeft() {
         <Divider />
         <Typography variant="h4">Design Your Palette</Typography>
         <div>
-          <Button variant="contained" color="secondary">
+          <Button variant="contained" color="secondary" onClick={clearColors}>
             Clear Palette
           </Button>
-          <Button variant="contained" color="primary">
-            Random Color
-          </Button>
-        </div>
-        <ChromePicker
-          color={currentColor}
-          onChangeComplete={handleColorChange}
-        />
-        <ValidatorForm onSubmit={addNewColor}>
-          <TextValidator
-            value={newColorName}
-            onChange={handleNewColorNameChange}
-            validators={["required", "isColorNameUnique", "isColorUnique"]}
-            errorMessages={[
-              "Enter a color name",
-              "Color name must be unique",
-              "Color already used!",
-            ]}
-          />
           <Button
             variant="contained"
             color="primary"
-            style={{ backgroundColor: currentColor }}
-            type="submit"
+            onClick={addRandomColor}
+            disabled={paletteIsFull}
           >
-            Add Color
+            Random Color
           </Button>
-        </ValidatorForm>
+        </div>
+        <ColorPickerForm
+          paletteIsFull={paletteIsFull}
+          addNewColor={addNewColor}
+          colors={colors}
+        />
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
-        {colors.map((color, index) => (
-          <DraggableColorBox
-            color={color.color}
-            name={color.name}
-            key={index}
-          />
-        ))}
+        <DraggableColorList
+          colors={colors}
+          deleteColor={handleDelete}
+          axis="xy"
+          onSortEnd={onSortEnd}
+        />
       </Main>
     </Box>
   );

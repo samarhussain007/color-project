@@ -7,19 +7,29 @@ import { generatedPallete } from "./ColorHelper";
 import PalleteList from "./PalleteList.js";
 import SingleColorPalette from "./SingleColorPalette";
 import NewPalleteForm from "./NewPalleteForm";
+import { useState } from "react";
 
 function App() {
+  const [palettes, setPalettes] = useState(seedColors);
+
+  const savePallete = (newPallete) => {
+    // console.log(newPallete);
+    setPalettes([...palettes, newPallete]);
+  };
+  console.log(palettes);
   return (
     <Routes>
-      <Route path="/" element={<PalleteList palettes={seedColors} />} />
-      <Route path="/palette/new" element={<NewPalleteForm />} />
+      <Route path="/" element={<PalleteList palettes={palettes} />} />
       <Route
-        path="/palette/:id"
-        element={<Pallete palette={generatedPallete(...seedColors)} />}
+        path="/palette/new"
+        element={
+          <NewPalleteForm savePallete={savePallete} palettes={palettes} />
+        }
       />
+      <Route path="/palette/:id" element={<Pallete palette={palettes} />} />
       <Route
         path="/palette/:id/:colorId"
-        element={<SingleColorPalette palette={seedColors} />}
+        element={<SingleColorPalette palette={palettes} />}
       />
     </Routes>
   );
