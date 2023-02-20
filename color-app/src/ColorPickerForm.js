@@ -1,18 +1,37 @@
 import * as React from "react";
 import { styled, useTheme } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import Drawer from "@mui/material/Drawer";
-import Typography from "@mui/material/Typography";
-import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+
 import { ChromePicker } from "react-color";
 import { Button } from "@mui/material";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
-import { useNavigate } from "react-router-dom";
-import { arrayMove } from "react-sortable-hoc";
-import DraggableColorList from "./DraggableColorList";
-import PaletteFormNav from "./PaletteFormNav";
+
+const StyledColorPicker = styled("div")`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+  margin-top: 1rem;
+  .picker {
+    width: 100% !important;
+    margin-top: 2rem;
+  }
+  .form-color-name {
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .add-color {
+    width: 100%;
+    padding: 1rem;
+    margin-top: 1rem;
+    font-size: 1.5rem;
+  }
+  .color-name-input {
+    width: 100%;
+    margin-top: 1rem;
+    font-size: 1.5rem;
+  }
+`;
 
 const ColorPickerForm = (props) => {
   const { paletteIsFull, addNewColor, colors } = props;
@@ -42,18 +61,24 @@ const ColorPickerForm = (props) => {
     );
   }, [colors, currentColor]);
   return (
-    <div>
-      <ChromePicker color={currentColor} onChangeComplete={handleColorChange} />
-      <ValidatorForm onSubmit={handleSubmit}>
+    <StyledColorPicker>
+      <ChromePicker
+        color={currentColor}
+        onChangeComplete={handleColorChange}
+        className="picker"
+      />
+      <ValidatorForm onSubmit={handleSubmit} className="form-color-name">
         <TextValidator
           value={newColorName}
           onChange={handleNewColorNameChange}
+          placeholder="Color Name"
           validators={["required", "isColorNameUnique", "isColorUnique"]}
           errorMessages={[
             "Enter a color name",
             "Color name must be unique",
             "Color already used!",
           ]}
+          className="color-name-input"
         />
         <Button
           variant="contained"
@@ -61,11 +86,12 @@ const ColorPickerForm = (props) => {
           disabled={paletteIsFull}
           style={{ backgroundColor: paletteIsFull ? "grey" : currentColor }}
           type="submit"
+          className="add-color"
         >
           {paletteIsFull ? "Palette Full" : "Add Color"}
         </Button>
       </ValidatorForm>
-    </div>
+    </StyledColorPicker>
   );
 };
 

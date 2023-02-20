@@ -47,8 +47,6 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 export default function PersistentDrawerLeft(props) {
   const { maxColors = 20 } = props;
-
-  const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
   const [colors, setColors] = React.useState(props.palettes[0].colors);
@@ -125,6 +123,23 @@ export default function PersistentDrawerLeft(props) {
             width: drawerWidth,
             boxSizing: "border-box",
           },
+
+          "& .container": {
+            width: "90%",
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          },
+          "& .buttons": {
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+          },
+          "& .button": {
+            width: "50%",
+          },
         }}
         variant="persistent"
         anchor="left"
@@ -136,25 +151,35 @@ export default function PersistentDrawerLeft(props) {
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <Typography variant="h4">Design Your Palette</Typography>
-        <div>
-          <Button variant="contained" color="secondary" onClick={clearColors}>
-            Clear Palette
-          </Button>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={addRandomColor}
-            disabled={paletteIsFull}
-          >
-            Random Color
-          </Button>
+        <div className="container">
+          <Typography variant="h4" gutterBottom>
+            Design Your Palette
+          </Typography>
+          <div className="buttons">
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={clearColors}
+              className="button"
+            >
+              Clear Palette
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={addRandomColor}
+              disabled={paletteIsFull}
+              className="button"
+            >
+              Random Color
+            </Button>
+          </div>
+          <ColorPickerForm
+            paletteIsFull={paletteIsFull}
+            addNewColor={addNewColor}
+            colors={colors}
+          />
         </div>
-        <ColorPickerForm
-          paletteIsFull={paletteIsFull}
-          addNewColor={addNewColor}
-          colors={colors}
-        />
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
