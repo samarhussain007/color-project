@@ -9,6 +9,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { Button } from "@mui/material";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { useNavigate } from "react-router-dom";
+import FormDialog from "./PaletteMetaForm";
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -79,18 +80,12 @@ const PaletteFormNav = (props) => {
             Create a Palette
           </Typography>
           <div className="nav-btns">
-            <ValidatorForm onSubmit={() => props.handleSave(newPalleteName)}>
-              <TextValidator
-                label="Palette Name"
-                value={newPalleteName}
-                onChange={handleNewPalleteNameChange}
-                validators={["required", "isPaletteNameUnique"]}
-                errorMessages={["Enter Palette Name", "Name already used"]}
-              />
-              <Button variant="contained" color="secondary" type="submit">
-                Save Palette
-              </Button>
-            </ValidatorForm>
+            <FormDialog
+              palettes={props.palettes}
+              handleSave={props.handleSave}
+              newPalleteName={newPalleteName}
+              handleNewPalleteNameChange={handleNewPalleteNameChange}
+            />
             <Button
               variant="contained"
               color="secondary"
