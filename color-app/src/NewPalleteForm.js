@@ -92,7 +92,6 @@ export default function PersistentDrawerLeft(props) {
 
   const addRandomColor = () => {
     const allColors = props.palettes.map((p) => p.colors).flat();
-    console.log(allColors);
 
     let rand;
     let randomColor;

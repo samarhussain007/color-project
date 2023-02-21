@@ -16,7 +16,6 @@ function App() {
     // console.log(newPallete);
     setPalettes([...palettes, newPallete]);
   };
-  console.log(palettes);
   return (
     <Routes>
       <Route path="/" element={<PalleteList palettes={palettes} />} />
