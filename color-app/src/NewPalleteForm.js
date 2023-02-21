@@ -70,11 +70,11 @@ export default function PersistentDrawerLeft(props) {
     setColors((colors) => arrayMove(colors, oldIndex, newIndex));
   };
 
-  const handleSave = (newPalleteName) => {
+  const handleSave = ({ paletteName, emoji }) => {
     const newPallete = {
-      paletteName: newPalleteName,
-      id: newPalleteName.toLowerCase().replace(/ /g, "-"),
-      emoji: "🎨",
+      paletteName: paletteName,
+      id: paletteName.toLowerCase().replace(/ /g, "-"),
+      emoji: emoji,
       colors: colors,
     };
     // console.log(newPallete);

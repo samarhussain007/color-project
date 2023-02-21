@@ -80,12 +80,6 @@ const PaletteFormNav = (props) => {
             Create a Palette
           </Typography>
           <div className="nav-btns">
-            <FormDialog
-              palettes={props.palettes}
-              handleSave={props.handleSave}
-              newPalleteName={newPalleteName}
-              handleNewPalleteNameChange={handleNewPalleteNameChange}
-            />
             <Button
               variant="contained"
               color="secondary"
@@ -93,6 +87,12 @@ const PaletteFormNav = (props) => {
             >
               Go Back
             </Button>
+            <FormDialog
+              palettes={props.palettes}
+              handleSave={props.handleSave}
+              newPalleteName={newPalleteName}
+              handleNewPalleteNameChange={handleNewPalleteNameChange}
+            />
           </div>
         </Toolbar>
       </AppBar>

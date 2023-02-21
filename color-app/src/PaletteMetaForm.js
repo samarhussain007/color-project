@@ -7,19 +7,34 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
+import data from "@emoji-mart/data";
+import Picker from "@emoji-mart/react";
 
 export default function FormDialog(props) {
-  const [open, setOpen] = React.useState(false);
+  const [stage, setStage] = React.useState("");
   const { palettes, handleNewPalleteNameChange, newPalleteName, handleSave } =
     props;
 
   const handleClickOpen = () => {
-    setOpen(true);
+    setStage("form");
   };
 
   const handleClose = () => {
-    setOpen(false);
+    setStage("");
   };
+
+  const handleEmojiPicker = () => {
+    setStage("emoji");
+  };
+
+  const savePalette = (e) => {
+    const newPalette = {
+      paletteName: newPalleteName,
+      emoji: e.native,
+    };
+    handleSave(newPalette);
+  };
+
   React.useEffect(() => {
     ValidatorForm.addValidationRule("isPaletteNameUnique", (value) =>
       palettes.every(
@@ -30,17 +45,26 @@ export default function FormDialog(props) {
 
   return (
     <div>
+      <Dialog open={stage === "emoji" ? true : false} onClose={handleClose}>
+        <DialogTitle id="form-dialog-title">Choose a Palette Emoji</DialogTitle>
+        <Picker
+          data={data}
+          onEmojiSelect={savePalette}
+          theme="light"
+          title="Pick a palette Emoji"
+        />
+      </Dialog>
       <Button variant="contained" color="error" onClick={handleClickOpen}>
-        Open form dialog
+        Save Palette
       </Button>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={stage === "form" ? true : false} onClose={handleClose}>
         <DialogTitle>Subscribe</DialogTitle>
-        <ValidatorForm onSubmit={() => handleSave(newPalleteName)}>
+        <ValidatorForm onSubmit={handleEmojiPicker}>
           <DialogContent>
             <DialogContentText>
-              To subscribe to this website, please enter your email address
-              here. We will send updates occasionally.
+              Please enter a name for your new palette. Make sure it's unique!
             </DialogContentText>
+
             <TextValidator
               label="Palette Name"
               value={newPalleteName}
