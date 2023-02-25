@@ -16,8 +16,7 @@ const MyCustomDiv = styled("div")(({ theme, props }) => {
       opacity: 1;
     }
 
-
-
+    
     ${sizes.down("lg")} {
       width: 25%;
       height: ${props.showingFullPalette ? "20%" : "33.3333%"};
@@ -27,7 +26,7 @@ const MyCustomDiv = styled("div")(({ theme, props }) => {
       width: 50%;
       height: ${props.showingFullPalette ? "10%" : "20%"};
     }
-    
+
     ${sizes.down("xs")}{
       width: 100%;
       height: ${props.showingFullPalette ? "10%" : "20%"};
@@ -232,6 +231,11 @@ const MyCustomDiv = styled("div")(({ theme, props }) => {
       margin-bottom: 0;
       padding: 1rem;
       text-transform: uppercase;
+
+      ${sizes.down("xs")}{
+        font-size: 5rem;
+      }
+
     }
     
     .copy-msg p {

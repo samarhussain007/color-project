@@ -1,9 +1,9 @@
 import { styled } from "@mui/material";
+import sizes from "./sizes";
 
 const StyledSingleColorPalette = styled("div")(
   () => `
   height: 100vh;
-  overflow: hidden;
 
   .Pallete-colors {
     height: 90%;
@@ -19,6 +19,25 @@ const StyledSingleColorPalette = styled("div")(
     margin-bottom: -4px;
     opacity: 1;
     background-color: black;
+
+    ${sizes.down("lg")} {
+      width: 25%;
+      height: 33.3333%;
+    }
+
+    ${sizes.down("md")} {
+      width: 50%;
+      height: 20%;
+    }
+
+
+
+    ${sizes.down("xs")} {
+      width: 100%;
+      height: 10%;
+    }
+
+
   }
 
   .back-button {
@@ -42,6 +61,7 @@ const StyledSingleColorPalette = styled("div")(
     background: rgba(255, 255, 255, 0.5);
     color: black;
   }
+  
   `
 );
 

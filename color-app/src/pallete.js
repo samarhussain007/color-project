@@ -28,7 +28,6 @@ function Pallete(props) {
   const StyledPalette = styled("div")(
     () => `
   height: 100vh;
-  overflow: hidden;
 
   .Pallete-colors {
     height: 90%;

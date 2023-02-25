@@ -1,4 +1,5 @@
 import { styled } from "@mui/material";
+import sizes from "./sizes";
 
 const StyledNavbar = styled("header")(
   () => `
@@ -18,6 +19,10 @@ const StyledNavbar = styled("header")(
   height: 100%;
   display: flex;
   align-items: center;
+
+  ${sizes.down("xs")}{
+    display: none;
+  }
 }
 
 .logo a {
@@ -51,7 +56,30 @@ const StyledNavbar = styled("header")(
   height: 13px !important;
   margin-left: -7px !important;
   margin-top: -3px !important;
+
+  ${sizes.down("md")}{
+    width: 18px !important;
+    height: 18px !important;
+    margin-left: -9px !important;
+    margin-top: -5px !important;
+  }
+
+  ${sizes.down("sm")}{
+    width: 13px !important;
+    height: 13px !important;
+    margin-left: -7px !important;
+    margin-top: -3px !important;
+  }
+
+  ${sizes.down("xs")}{
+    width: 8px !important;
+    height: 8px !important;
+    margin-left: -4px !important;
+    margin-top: -2px !important;
+  }
 }
+
+
 
 .select-container {
   margin-left: auto;
