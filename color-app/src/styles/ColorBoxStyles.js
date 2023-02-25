@@ -10,7 +10,7 @@ const MyCustomDiv = styled("div")(({ theme, props }) => {
     display: inline-block;
     position: relative;
     cursor: pointer;
-    margin-bottom: -3.5px;
+    margin-bottom: -6px;
     &:hover button {
       opacity: 1;
     }

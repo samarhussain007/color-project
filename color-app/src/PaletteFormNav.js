@@ -10,40 +10,7 @@ import { Button } from "@mui/material";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { useNavigate } from "react-router-dom";
 import FormDialog from "./PaletteMetaForm";
-
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== "open",
-})(
-  ({ theme, open }) => (
-    {
-      transition: theme.transitions.create(["margin", "width"], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
-      ...(open && {
-        width: `calc(100% - ${drawerWidth}px)`,
-        marginLeft: `${drawerWidth}px`,
-        transition: theme.transitions.create(["margin", "width"], {
-          easing: theme.transitions.easing.easeOut,
-          duration: theme.transitions.duration.enteringScreen,
-        }),
-      }),
-    },
-    `
-  .nav-btns {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    width: 100%;
-  }
-  .nav-btns button {
-    margin: 0 0.5rem;
-  }
-  
-`
-  )
-);
-const drawerWidth = 400;
+import AppBar from "./styles/AppBarStyles";
 
 const PaletteFormNav = (props) => {
   const { open } = props;
@@ -76,7 +43,7 @@ const PaletteFormNav = (props) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
+          <Typography variant="h6" style={{ width: "100%" }} component="div">
             Create a Palette
           </Typography>
           <div className="nav-btns">

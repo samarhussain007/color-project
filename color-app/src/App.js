@@ -1,24 +1,52 @@
-import logo from "./logo.svg";
-
 import { Routes, Route, useParams } from "react-router-dom";
 import Pallete from "./pallete";
 import seedColors from "./seedColors";
-import { generatedPallete } from "./ColorHelper";
 import PalleteList from "./PalleteList.js";
 import SingleColorPalette from "./SingleColorPalette";
 import NewPalleteForm from "./NewPalleteForm";
 import { useState } from "react";
 
 function App() {
-  const [palettes, setPalettes] = useState(seedColors);
+  const savePalletejson = JSON.parse(window.localStorage.getItem("palettes"));
+  const [palettes, setPalettes] = useState(savePalletejson || seedColors);
 
   const savePallete = (newPallete) => {
-    // console.log(newPallete);
-    setPalettes([...palettes, newPallete]);
+    setPalettes((prevState) => {
+      const updatedPalettes = [...prevState, newPallete];
+      syncLocalStorage(updatedPalettes);
+      return updatedPalettes;
+    });
   };
+
+  const syncLocalStorage = (updatedPalettes) => {
+    window.localStorage.setItem("palettes", JSON.stringify(updatedPalettes));
+  };
+
+  const deletePalette = (id) => {
+    setPalettes((prevState) => {
+      const updatedPalettes = prevState.filter((pallete) => pallete.id !== id);
+      syncLocalStorage(updatedPalettes);
+      return updatedPalettes;
+    });
+  };
+
+  const resetPallete = () => {
+    window.localStorage.removeItem("palettes");
+    setPalettes(seedColors);
+  };
+
   return (
     <Routes>
-      <Route path="/" element={<PalleteList palettes={palettes} />} />
+      <Route
+        path="/"
+        element={
+          <PalleteList
+            palettes={palettes}
+            deletePalette={deletePalette}
+            resetPallete={resetPallete}
+          />
+        }
+      />
       <Route
         path="/palette/new"
         element={
