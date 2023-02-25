@@ -2,8 +2,7 @@ import React from "react";
 import { styled } from "@mui/material";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Link } from "react-router-dom";
-import chroma from "chroma-js";
-import { withStyles } from "@mui/styles";
+
 import MyCustomDiv from "./styles/ColorBoxStyles";
 
 function ColorBox(props) {
