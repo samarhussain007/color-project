@@ -136,7 +136,6 @@ const MyCustomDiv = styled("div")(({ theme, props }) => {
       background: rgba(255, 255, 255, 0.281);
       font-size: 1rem;
       line-height: 30px;
-      color: white;
       text-transform: uppercase;
       transition: all 0.5s;
       text-decoration: none;
@@ -174,7 +173,6 @@ const MyCustomDiv = styled("div")(({ theme, props }) => {
       border: none;
       right: 0;
       bottom: 0;
-      color: white;
       width: 60px;
       height: 30px;
       text-align: center;
@@ -211,7 +209,6 @@ const MyCustomDiv = styled("div")(({ theme, props }) => {
     
       transform: scale(0.1);
       opacity: 0;
-      color: white;
     }
     
     .copy-msg.show {
