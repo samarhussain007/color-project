@@ -15,23 +15,10 @@ const MyCustomDiv = styled("div")(({ theme, props }) => {
     &:hover button {
       opacity: 1;
     }
+    hey
 
     
-    ${sizes.down("lg")} {
-      width: 25%;
-      height: ${props.showingFullPalette ? "20%" : "33.3333%"};
-    }
-
-    ${sizes.down("md")}{
-      width: 50%;
-      height: ${props.showingFullPalette ? "10%" : "20%"};
-    }
-
-    ${sizes.down("xs")}{
-      width: 100%;
-      height: ${props.showingFullPalette ? "10%" : "20%"};
-    }
-
+  
 
 
     .color-name {
@@ -231,11 +218,6 @@ const MyCustomDiv = styled("div")(({ theme, props }) => {
       margin-bottom: 0;
       padding: 1rem;
       text-transform: uppercase;
-
-      ${sizes.down("xs")}{
-        font-size: 5rem;
-      }
-
     }
     
     .copy-msg p {
@@ -250,3 +232,22 @@ const MyCustomDiv = styled("div")(({ theme, props }) => {
 });
 
 export default MyCustomDiv;
+
+// ${sizes.down("lg")} {
+//   width: 25%;
+//   height: ${props.showingFullPalette ? "20%" : "33.3333%"};
+// }
+
+// ${sizes.down("md")}{
+//   width: 50%;
+//   height: ${props.showingFullPalette ? "10%" : "20%"};
+// }
+
+// ${sizes.down("xs")}{
+//   width: 100%;
+//   height: ${props.showingFullPalette ? "10%" : "20%"};
+// }
+
+// ${sizes.down("xs")}{
+//   font-size: 5rem;
+// }
