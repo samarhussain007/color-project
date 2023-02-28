@@ -1,6 +1,7 @@
 import { styled } from "@mui/material/styles";
 import MuiAppBar from "@mui/material/AppBar";
 import { DRAWER_WIDTH } from "./Constants";
+import sizes from "./sizes";
 
 const drawerWidth = DRAWER_WIDTH;
 
@@ -28,9 +29,16 @@ const AppBar = styled(MuiAppBar, {
       align-items: center;
       justify-content: flex-end;
       width: 100%;
+      ${sizes.down("xs")}{
+        margin-right: 0.5rem;
+      }
     }
     .nav-btns button {
       margin: 0 0.5rem;
+      ${sizes.down("xs")}{
+        margin: 0 0.2rem;
+        padding: 0.3rem;
+      }
     }
     
   `

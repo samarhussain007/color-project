@@ -21,7 +21,7 @@ const PalleteList = ({ palettes, deletePalette, resetPallete }) => {
       <div className="container">
         <nav className="nav">
           <h1>React Colors</h1>
-          <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+          <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
             {" "}
             <Link to="/palette/new">Create Palette</Link>
             <Button color="error" variant="contained" onClick={resetPallete}>

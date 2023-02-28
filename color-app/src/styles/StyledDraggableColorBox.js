@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import sizes from "./sizes";
 
 const StyledDraggableColorBox = styled.div`
   width: 20%;
@@ -12,6 +13,21 @@ const StyledDraggableColorBox = styled.div`
   &:hover svg {
     color: white;
     transform: scale(1.5);
+  }
+
+  ${sizes.down("lg")} {
+    width: 25%;
+    height: 20%;
+  }
+
+  ${sizes.down("md")} {
+    width: 50%;
+    height: 10%;
+  }
+
+  ${sizes.down("xs")} {
+    width: 100%;
+    height: 5%;
   }
 
   .boxContent {

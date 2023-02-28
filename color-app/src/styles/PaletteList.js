@@ -1,4 +1,5 @@
 import { styled } from "@mui/material/styles";
+import sizes from "./sizes";
 
 const StyledPaletteList = styled("div")(
   () => `
@@ -14,6 +15,13 @@ const StyledPaletteList = styled("div")(
         align-items: flex-start;
         flex-direction: column;
         flex-wrap: wrap;
+        ${sizes.down("xl")}{
+          width: 60%;
+        }
+
+        ${sizes.down("xs")}{
+          width: 75%;
+        }
       }
       .nav{
         display: flex;
@@ -31,8 +39,18 @@ const StyledPaletteList = styled("div")(
         width: 100%;
         display: grid;
         grid-template-columns: repeat(3,30%);
-        grid-gap: 5%;
+        grid-gap: 1.5rem;
+
+        ${sizes.down("md")}{
+          grid-template-columns: repeat(2,50%);
+        }
+
+        ${sizes.down("xs")}{
+          grid-template-columns: repeat(1,100%);
+          grid-gap: 1rem;
+        }
       }
+
   `
 );
 

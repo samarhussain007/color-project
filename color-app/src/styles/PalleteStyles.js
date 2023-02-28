@@ -4,6 +4,7 @@ import sizes from "./sizes";
 const StyledSingleColorPalette = styled("div")(
   () => `
   height: 100vh;
+  overflow: hidden;
 
   .Pallete-colors {
     height: 90%;
