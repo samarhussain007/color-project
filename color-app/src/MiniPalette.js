@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { withStyles } from "@mui/styles";
 import Delete from "@mui/icons-material/Delete";
 
@@ -58,34 +58,46 @@ const styles = {
     transition: "all 0.3s ease-in-out !important",
   },
 };
-function MiniPallete(props) {
-  const { classes, paletteName, emoji, colors, deletePalette, id, openDialog } =
-    props;
-  const miniColorBoxes = colors.map((color) => {
+const PureMiniPallete = memo(
+  function MiniPallete(props) {
+    const {
+      classes,
+      paletteName,
+      emoji,
+      colors,
+      deletePalette,
+      id,
+      openDialog,
+    } = props;
+    const miniColorBoxes = colors.map((color) => {
+      return (
+        <div
+          className={classes.miniColor}
+          style={{ backgroundColor: color.color }}
+          key={color.name}
+        ></div>
+      );
+    });
+
+    const handleDelete = (e) => {
+      e.stopPropagation();
+      openDialog(id);
+    };
+
     return (
-      <div
-        className={classes.miniColor}
-        style={{ backgroundColor: color.color }}
-        key={color.name}
-      ></div>
+      <div className={classes.root} onClick={props.handleClick}>
+        <Delete className={classes.deleteIcon} onClick={handleDelete} />
+        <div className={classes.colors}>{miniColorBoxes}</div>
+        <h5 className={classes.title}>
+          {paletteName}
+          <span className={classes.emoji}>{emoji}</span>
+        </h5>
+      </div>
     );
-  });
+  },
+  (prevProps, nextProps) => {
+    return prevProps.paletteName === nextProps.paletteName;
+  }
+);
 
-  const handleDelete = (e) => {
-    e.stopPropagation();
-    openDialog(id);
-  };
-
-  return (
-    <div className={classes.root} onClick={props.handleClick}>
-      <Delete className={classes.deleteIcon} onClick={handleDelete} />
-      <div className={classes.colors}>{miniColorBoxes}</div>
-      <h5 className={classes.title}>
-        {paletteName}
-        <span className={classes.emoji}>{emoji}</span>
-      </h5>
-    </div>
-  );
-}
-
-export default withStyles(styles)(MiniPallete);
+export default withStyles(styles)(PureMiniPallete);

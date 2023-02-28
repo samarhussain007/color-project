@@ -62,7 +62,7 @@ const PalleteList = ({ palettes, deletePalette, resetPallete }) => {
               <CSSTransition key={palette.id} classNames="item" timeout={500}>
                 <MiniPallete
                   {...palette}
-                  handleClick={() => handleClick(palette.id)}
+                  handleClick={handleClick}
                   deletePalette={deletePalette}
                   openDialog={openDialog}
                   key={palette.id}
