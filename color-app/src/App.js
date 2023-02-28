@@ -77,6 +77,18 @@ function App() {
               </div>
             }
           />
+          <Route
+            path="*"
+            element={
+              <div className="page">
+                <PalleteList
+                  palettes={palettes}
+                  deletePalette={deletePalette}
+                  resetPallete={resetPallete}
+                />
+              </div>
+            }
+          />
         </Routes>
       </CSSTransition>
     </TransitionGroup>
