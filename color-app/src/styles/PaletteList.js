@@ -8,6 +8,7 @@ const StyledPaletteList = styled("div")(
        align-items: flex-start;
       justify-content: center;
       overflow: scroll;
+      
 
       .item-exit{
         opacity: 1;

@@ -158,6 +158,7 @@ export default function PersistentDrawerLeft(props) {
           deleteColor={handleDelete}
           axis="xy"
           onSortEnd={onSortEnd}
+          distance={20}
         />
       </Main>
     </Box>
