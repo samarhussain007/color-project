@@ -1,11 +1,11 @@
-import { Routes, Route, useParams, useLocation } from "react-router-dom";
+import { useState } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 import Pallete from "./pallete";
-import seedColors from "./seedColors";
 import PalleteList from "./PalleteList.js";
 import SingleColorPalette from "./SingleColorPalette";
 import NewPalleteForm from "./NewPalleteForm";
-import { useState } from "react";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
+import seedColors from "./seedColors";
 import "./app.css";
 
 function App() {
@@ -73,7 +73,7 @@ function App() {
             path="/palette/:id/:colorId"
             element={
               <div className="page">
-                <SingleColorPalette palette={palettes} />
+                <SingleColorPalette palettes={palettes} />
               </div>
             }
           />

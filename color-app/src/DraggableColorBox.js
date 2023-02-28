@@ -5,9 +5,8 @@ import { SortableElement } from "react-sortable-hoc";
 import StyledDraggableColorBox from "./styles/StyledDraggableColorBox";
 function DraggableColorBox(props) {
   const { handleClick, color, name } = props;
-
   return (
-    <StyledDraggableColorBox style={{ background: color }}>
+    <StyledDraggableColorBox style={{ background: color }} props={props}>
       <div className="boxContent">
         <span>{name}</span>
         <DeleteIcon className="deleteIcon" onClick={handleClick} />

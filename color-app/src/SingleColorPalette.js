@@ -1,7 +1,5 @@
 import React from "react";
-import seedColors from "./seedColors";
 import { useParams } from "react-router-dom";
-import { palette } from "@mui/system";
 import { generatedPallete } from "./ColorHelper";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -12,14 +10,12 @@ import StyledSingleColorPalette from "./styles/PalleteStyles";
 function SingleColorPalette(props) {
   const { id, colorId } = useParams();
   const [format, setFormat] = useState("hex");
-  console.log(props.palette);
-  const findPallete = (id) =>
-    props.palette.find((palette) => palette.id === id);
+  const { palettes } = props;
+  const findPallete = (id) => palettes.find((palette) => palette.id === id);
   const palette = generatedPallete(findPallete(id));
   function changeFormat(evt) {
     setFormat(evt);
   }
-
   const gatherShades = (palette, colorToFilterBy) => {
     let shades = [];
     let allColors = palette.colors;
@@ -31,7 +27,6 @@ function SingleColorPalette(props) {
     return shades.slice(1);
   };
   const shades = gatherShades(palette, colorId);
-  console.log(shades);
 
   const colorBoxes = shades.map((el) => (
     <ColorBox

@@ -13,17 +13,17 @@ import FormDialog from "./PaletteMetaForm";
 import AppBar from "./styles/AppBarStyles";
 
 const PaletteFormNav = (props) => {
-  const { open } = props;
+  const { open, palettes, handleDrawerOpen, handleSave } = props;
   const [newPalleteName, setNewPalleteName] = React.useState("");
   const navigate = useNavigate();
 
   React.useEffect(() => {
     ValidatorForm.addValidationRule("isPaletteNameUnique", (value) =>
-      props.palettes.every(
+      palettes.every(
         ({ paletteName }) => paletteName.toLowerCase() !== value.toLowerCase()
       )
     );
-  }, [props.palettes]);
+  }, [palettes]);
 
   const handleNewPalleteNameChange = (e) => {
     setNewPalleteName(e.target.value);
@@ -37,7 +37,7 @@ const PaletteFormNav = (props) => {
           <IconButton
             color="inherit"
             aria-label="open drawer"
-            onClick={props.handleDrawerOpen}
+            onClick={handleDrawerOpen}
             edge="start"
             sx={{ mr: 2, ...(open && { display: "none" }) }}
           >
@@ -55,8 +55,8 @@ const PaletteFormNav = (props) => {
               Go Back
             </Button>
             <FormDialog
-              palettes={props.palettes}
-              handleSave={props.handleSave}
+              palettes={palettes}
+              handleSave={handleSave}
               newPalleteName={newPalleteName}
               handleNewPalleteNameChange={handleNewPalleteNameChange}
             />

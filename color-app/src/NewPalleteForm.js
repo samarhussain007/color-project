@@ -1,5 +1,4 @@
-import * as React from "react";
-import { styled, useTheme } from "@mui/material/styles";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import Typography from "@mui/material/Typography";
@@ -14,13 +13,14 @@ import PaletteFormNav from "./PaletteFormNav";
 import ColorPickerForm from "./ColorPickerForm";
 import Main from "./styles/MainStyles";
 import DrawerHeader from "./styles/DrawerStyles";
+import seedColors from "./seedColors";
 const drawerWidth = 400;
 
 export default function PersistentDrawerLeft(props) {
-  const { maxColors = 20 } = props;
-  const [open, setOpen] = React.useState(false);
+  const { maxColors = 20, palettes, savePallete } = props;
+  const [open, setOpen] = useState(false);
 
-  const [colors, setColors] = React.useState(props.palettes[0].colors);
+  const [colors, setColors] = useState(seedColors[0].colors);
   const paletteIsFull = colors.length >= maxColors;
 
   const navigate = useNavigate();
@@ -49,7 +49,7 @@ export default function PersistentDrawerLeft(props) {
       colors: colors,
     };
     // console.log(newPallete);
-    props.savePallete(newPallete);
+    savePallete(newPallete);
     navigate("/");
   };
 
@@ -62,7 +62,7 @@ export default function PersistentDrawerLeft(props) {
   };
 
   const addRandomColor = () => {
-    const allColors = props.palettes.map((p) => p.colors).flat();
+    const allColors = palettes.map((p) => p.colors).flat();
 
     let rand;
     let randomColor;
@@ -81,7 +81,7 @@ export default function PersistentDrawerLeft(props) {
     <Box sx={{ display: "flex" }}>
       <PaletteFormNav
         open={open}
-        palettes={props.palettes}
+        palettes={palettes}
         handleSave={handleSave}
         handleDrawerOpen={handleDrawerOpen}
       />

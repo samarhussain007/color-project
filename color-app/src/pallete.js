@@ -1,16 +1,12 @@
 import React, { Component, useState } from "react";
 import ColorBox from "./ColorBox";
 import "rc-slider/assets/index.css";
-import Slider from "rc-slider";
-// import "./Pallete.css";
 import Navbar from "./Navbar";
 import { useParams } from "react-router-dom";
-import seedColors from "./seedColors";
 import { generatedPallete } from "./ColorHelper";
 import PaletteFooter from "./PaletteFooter";
 import { styled } from "@mui/material";
 import { useEffect } from "react";
-// import generatedPallete from "./ColorHelper";
 
 function Pallete(props) {
   useEffect(() => {
@@ -46,7 +42,6 @@ function Pallete(props) {
         id={el.id}
         paletteId={id}
         showingFullPalette={true}
-        // {...palette}
       />
     );
   });

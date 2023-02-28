@@ -1,8 +1,6 @@
 import React from "react";
-import { styled } from "@mui/material";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Link } from "react-router-dom";
-
 import MyCustomDiv from "./styles/ColorBoxStyles";
 
 function ColorBox(props) {
@@ -13,9 +11,6 @@ function ColorBox(props) {
     setCopied(true);
     setTimeout(() => setCopied(false), 1500);
   };
-
-  // const isDarkColor = chroma(background).luminance() <= 0.08;
-  // const isLightColor = chroma(background).luminance() >= 0.7;
 
   return (
     <CopyToClipboard text={background} onCopy={changeCopyState}>

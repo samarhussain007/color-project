@@ -61,15 +61,7 @@ const styles = {
 };
 const PureMiniPalette = memo(
   function MiniPallete(props) {
-    const {
-      classes,
-      paletteName,
-      emoji,
-      colors,
-      deletePalette,
-      id,
-      openDialog,
-    } = props;
+    const { classes, paletteName, emoji, colors, id, openDialog } = props;
     const miniColorBoxes = colors.map((color) => {
       return (
         <div
