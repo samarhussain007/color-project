@@ -1,6 +1,7 @@
-import React, { memo } from "react";
+import React from "react";
 import { withStyles } from "@mui/styles";
 import Delete from "@mui/icons-material/Delete";
+import { memo } from "react";
 
 const styles = {
   root: {
@@ -58,7 +59,7 @@ const styles = {
     transition: "all 0.3s ease-in-out !important",
   },
 };
-const PureMiniPallete = memo(
+const PureMiniPalette = memo(
   function MiniPallete(props) {
     const {
       classes,
@@ -85,7 +86,7 @@ const PureMiniPallete = memo(
     };
 
     return (
-      <div className={classes.root} onClick={props.handleClick}>
+      <div className={classes.root} onClick={() => props.handleClick(id)}>
         <Delete className={classes.deleteIcon} onClick={handleDelete} />
         <div className={classes.colors}>{miniColorBoxes}</div>
         <h5 className={classes.title}>
@@ -96,8 +97,7 @@ const PureMiniPallete = memo(
     );
   },
   (prevProps, nextProps) => {
-    return prevProps.paletteName === nextProps.paletteName;
+    return prevProps.id === nextProps.id;
   }
 );
-
-export default withStyles(styles)(PureMiniPallete);
+export default withStyles(styles)(PureMiniPalette);
