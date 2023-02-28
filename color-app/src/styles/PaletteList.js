@@ -3,11 +3,30 @@ import sizes from "./sizes";
 
 const StyledPaletteList = styled("div")(
   () => `
-    background-color:blue;
     height:100vh;
     display: flex;
        align-items: flex-start;
       justify-content: center;
+      overflow: scroll;
+
+      .item-exit{
+        opacity: 1;
+      }
+
+      .item-exit-active{
+        opacity: 0;
+        transition: opacity 500ms ease-out;
+      }
+
+      .item-enter{
+        opacity: 0;
+      }
+
+      .item-enter-active{
+        opacity: 1;
+        transition: opacity 500ms ease-out;
+      }
+
   
       .container{
         width:50%;

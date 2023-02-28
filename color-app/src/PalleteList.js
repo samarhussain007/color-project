@@ -5,6 +5,7 @@ import MiniPallete from "./MiniPalette";
 import { makeStyles } from "@mui/styles";
 import StyledPaletteList from "./styles/PaletteList";
 import { Button } from "@mui/material";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 const PalleteList = ({ palettes, deletePalette, resetPallete }) => {
   // const history = useHistory();
@@ -29,19 +30,22 @@ const PalleteList = ({ palettes, deletePalette, resetPallete }) => {
             </Button>
           </div>
         </nav>
-        <div className="palettes">
+
+        <TransitionGroup className="palettes">
           {palettes.map((palette) => {
             return (
-              <MiniPallete
-                {...palette}
-                handleClick={() => handleClick(palette.id)}
-                deletePalette={deletePalette}
-                key={palette.id}
-                id={palette.id}
-              />
+              <CSSTransition key={palette.id} classNames="item" timeout={500}>
+                <MiniPallete
+                  {...palette}
+                  handleClick={() => handleClick(palette.id)}
+                  deletePalette={deletePalette}
+                  key={palette.id}
+                  id={palette.id}
+                />
+              </CSSTransition>
             );
           })}
-        </div>
+        </TransitionGroup>
       </div>
     </StyledPaletteList>
   );
