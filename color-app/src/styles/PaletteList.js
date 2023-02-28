@@ -3,6 +3,7 @@ import sizes from "./sizes";
 
 const StyledPaletteList = styled("div")(
   () => `
+    background-color: blue;
     height:100vh;
     display: flex;
        align-items: flex-start;
